@@ -1,3 +1,20 @@
+---
+title: AI YouTube Summarizer
+emoji: 🎥
+colorFrom: blue
+colorTo: purple
+sdk: gradio
+sdk_version: "4.44.1"
+app_file: app.py
+pinned: false
+---
+
+# AI YouTube Summarizer
+
+An AI-powered YouTube Video Summarizer and Q&A application built with Gradio, LangChain, FAISS, and Google Gemini.
+
+
+
 # AI YouTube Summarizer
 
 A web app that turns YouTube videos into concise summaries, answers questions about video content, and analyzes transcript sentiment. Built with Google Gemini, LangChain, and Gradio.
