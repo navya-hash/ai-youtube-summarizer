@@ -497,8 +497,9 @@ with gr.Blocks() as interface:
         outputs=sentiment_output,
     )
 
-# Launch the app with specified server name and port
-interface.launch()
+
+if __name__ == "__main__":
+    interface.launch()
 
 
 
