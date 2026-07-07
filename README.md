@@ -12,147 +12,213 @@ pinned: false
 
 # AI YouTube Summarizer
 
-An AI-powered YouTube Video Summarizer and Q&A application built with Gradio, LangChain, FAISS, and Google Gemini.
-
-
-
-# AI YouTube Summarizer
-
-A web app that turns YouTube videos into concise summaries, answers questions about video content, and analyzes transcript sentiment. Built with Google Gemini, LangChain, and Gradio.
+An AI-powered web application that summarizes YouTube videos, answers questions about video content, performs transcript sentiment analysis, and supports multiple output languages using **Google Gemini**, **LangChain**, **FAISS**, and **Gradio**.
 
 ## Features
 
-- **Video summarization** — Fetches a YouTube transcript and generates a concise summary of the main points.
-- **Question answering** — Ask natural-language questions about a video; relevant transcript sections are retrieved with FAISS and answered by Gemini.
-- **Sentiment analysis** — Returns overall sentiment, confidence, key emotions, and a short explanation of the transcript tone.
-- **Multi-language output** — Summaries, answers, and sentiment explanations can be generated in:
+- 🎥 **YouTube Video Summarization** — Generates concise summaries from video transcripts.
+- 💬 **Question Answering** — Ask natural-language questions about any supported YouTube video.
+- 😊 **Sentiment Analysis** — Analyzes transcript sentiment with confidence, key emotions, and explanation.
+- 🌍 **Multi-language Output** — Generate summaries, answers, and sentiment analysis in:
   - English
   - Hindi
+  - Gujarati
   - Spanish
   - French
   - German
   - Japanese
-  - Gujarati
-- **Transcript fallback** — If a transcript is not available in the selected language, the app falls back to English (or another available transcript) and translates via Gemini.
+- 🔄 **Transcript Fallback** — Automatically falls back to English or another available transcript when the selected language isn't available.
 
-## Tech Stack
+---
+
+# Tech Stack
 
 | Layer | Technology |
 | --- | --- |
-| UI | [Gradio](https://gradio.app/) |
-| LLM | [Google Gemini](https://ai.google.dev/) (`gemini-2.5-flash`) via `langchain-google-genai` |
-| Embeddings | Google Generative AI Embeddings (`models/embedding-001`) |
-| Orchestration | [LangChain](https://www.langchain.com/) |
-| Vector search | [FAISS](https://github.com/facebookresearch/faiss) |
-| Transcripts | [youtube-transcript-api](https://github.com/jdepoix/youtube-transcript-api) |
-| Config | `python-dotenv` |
+| UI | Gradio |
+| LLM | Google Gemini 2.5 Flash |
+| Framework | LangChain |
+| Vector Database | FAISS |
+| Embeddings | Google Generative AI Embeddings |
+| Transcript API | youtube-transcript-api |
+| Environment | python-dotenv |
 
-## Installation
+---
 
-### Prerequisites
+# Installation
 
-- Python 3.11+ recommended
-- A [Google AI Studio API key](https://aistudio.google.com/apikey)
+## Prerequisites
 
-### Steps
+- Python 3.10+
+- Google AI Studio API Key
 
-1. **Clone the repository**
-
-   ```bash
-   git clone <your-repo-url>
-   cd "AI YOUTUBE SUMMARIZER"
-   ```
-
-2. **Create and activate a virtual environment**
-
-   **Windows (PowerShell):**
-
-   ```powershell
-   python -m venv my_env
-   .\my_env\Scripts\Activate.ps1
-   ```
-
-   **macOS / Linux:**
-
-   ```bash
-   python3 -m venv my_env
-   source my_env/bin/activate
-   ```
-
-3. **Install dependencies**
-
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. **Set up environment variables** (see below)
-
-## Environment Variables
-
-Create a `.env` file in the project root:
-
-```env
-GOOGLE_API_KEY=your_google_api_key_here
-```
-
-| Variable | Required | Description |
-| --- | --- | --- |
-| `GOOGLE_API_KEY` | Yes | API key from [Google AI Studio](https://aistudio.google.com/apikey). Used for Gemini text generation and embeddings. |
-
-Alternatively, set the variable in your shell before running the app:
-
-**Windows (PowerShell):**
-
-```powershell
-$env:GOOGLE_API_KEY = "your_google_api_key_here"
-```
-
-**macOS / Linux:**
+## Clone Repository
 
 ```bash
-export GOOGLE_API_KEY="your_google_api_key_here"
+git clone <your-github-repository-url>
+cd AI-YOUTUBE-SUMMARIZER
 ```
 
-> **Note:** Do not commit your `.env` file or API key to version control.
+## Create Virtual Environment
 
-## How to Run Locally
+### Windows
 
-1. Activate your virtual environment (if not already active).
+```powershell
+python -m venv my_env
+.\my_env\Scripts\Activate.ps1
+```
 
-2. Start the app:
+### macOS/Linux
 
-   ```bash
-   python app.py
-   ```
+```bash
+python3 -m venv my_env
+source my_env/bin/activate
+```
 
-3. Open the URL shown in the terminal (typically `http://127.0.0.1:7860`).
+## Install Dependencies
 
-4. In the UI:
-   - Paste a YouTube video URL
-   - Choose an **Output Language**
-   - Click **Summarize Video**, **Ask a Question**, or **Analyze Sentiment**
+```bash
+pip install -r requirements.txt
+```
 
-### Example YouTube URL format
+---
+
+# Environment Variables
+
+Create a `.env` file in the project root.
+
+```env
+GOOGLE_API_KEY=your_google_api_key
+```
+
+Alternatively,
+
+### Windows
+
+```powershell
+$env:GOOGLE_API_KEY="your_google_api_key"
+```
+
+### macOS/Linux
+
+```bash
+export GOOGLE_API_KEY="your_google_api_key"
+```
+
+> Never commit your API key or `.env` file to GitHub.
+
+---
+
+# Run Locally
+
+```bash
+python app.py
+```
+
+Open
+
+```
+http://127.0.0.1:7860
+```
+
+Paste a YouTube URL and use any of the available features.
+
+---
+
+# Deployment
+
+## Deploy on Hugging Face Spaces
+
+1. Create a new **Gradio Space** on Hugging Face.
+
+2. Push the project files to the Space.
+
+3. Add the following **Repository Secret**:
+
+| Name | Value |
+|------|------|
+| GOOGLE_API_KEY | Your Google AI Studio API Key |
+
+Go to:
+
+```
+Settings → Repository Secrets
+```
+
+Add
+
+```
+GOOGLE_API_KEY=<your_api_key>
+```
+
+4. Ensure the repository contains:
+
+```
+app.py
+requirements.txt
+README.md
+```
+
+5. Hugging Face will automatically build and deploy the application.
+
+---
+
+# Project Structure
+
+```
+AI-YOUTUBE-SUMMARIZER/
+│
+├── app.py
+├── requirements.txt
+├── README.md
+├── .gitignore
+└── .env (local only)
+```
+
+---
+
+# Troubleshooting
+
+### GOOGLE_API_KEY environment variable is not set
+
+Add your API key to the `.env` file (local) or Repository Secrets (Hugging Face).
+
+---
+
+### Invalid YouTube URL
+
+Use URLs in the format
 
 ```
 https://www.youtube.com/watch?v=VIDEO_ID
 ```
 
-The video must have captions/transcripts enabled on YouTube for the app to work.
+---
 
-## Project Structure
+### No transcript available
 
-```
-AI YOUTUBE SUMMARIZER/
-├── app.py              # Main application (Gradio UI + logic)
-├── requirements.txt    # Python dependencies
-├── .env                # Local environment variables (not committed)
-├── .gitignore
-└── README.md
-```
+Some videos disable captions or do not provide transcripts.
 
-## Troubleshooting
+---
 
-- **`GOOGLE_API_KEY environment variable is not set`** — Add the key to `.env` or export it in your shell.
-- **`No transcript available for this video`** — The video may not have captions, or transcripts may be disabled by the uploader.
-- **`Invalid YouTube URL`** — Use a standard watch URL in the form `https://www.youtube.com/watch?v=...`.
+### SSL Error while fetching transcript on Hugging Face
+
+Some Hugging Face environments may experience SSL handshake issues when connecting to YouTube. The application works correctly when run locally. If this occurs, try another video or deploy the application on another hosting platform (e.g., Render or Railway).
+
+---
+
+# Future Improvements
+
+- Support playlist summarization
+- Export summaries as PDF
+- Chat history
+- Timestamp-based navigation
+- Transcript download
+- Multiple LLM support
+- Video keyword extraction
+
+---
+
+# License
+
+This project is intended for educational and learning purposes.
