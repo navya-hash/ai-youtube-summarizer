@@ -52,10 +52,6 @@ def get_video_id(url):
     return match.group(1) if match else None
 
 
-#Function call
-url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-video_id = get_video_id(url)
-print(video_id)  # Output: dQw4w9WgXcQ
 
 
 """
@@ -100,15 +96,7 @@ def get_transcript(url, language="English"):
     return transcript if transcript else None
 
 
-#Function call
-# Sample YouTube URL
-url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
 
-# Fetching the transcript
-transcript = get_transcript(url)
-
-# Output the fetched transcript
-print(transcript)
 
 """
 {
@@ -152,25 +140,7 @@ def chunk_transcript(processed_transcript, chunk_size=200, chunk_overlap=20):
     return chunks
 
 
-# Sample processed transcript string
-processed_transcript = """Text: We're no strangers to love. Start: 0.0
-Text: You know the rules and so do I. Start: 3.5
-Text: A full commitment's what I'm thinking of. Start: 7.5"""
 
-# Chunking the transcript
-chunks = chunk_transcript(processed_transcript)
-
-# Output the chunks
-print(chunks)
-
-"""
-ECPECTED OUTPUT:
-[
-    "Text: We're no strangers to love. Start: 0.0\nText: You know the rules and so do I. Start: 3.5",
-    "Text: You know the rules and so do I. Start: 3.5\nText: A full commitment's what I'm thinking of. Start: 7.5"
-]
-
-"""
 
 
 def get_google_api_key():
