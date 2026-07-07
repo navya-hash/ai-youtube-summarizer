@@ -74,29 +74,59 @@ def _pick_transcript(transcripts, language_code):
     return generated_match
 
 
+# def get_transcript(url, language="English"):
+#     video_id = get_video_id(url)
+#     if not video_id:
+#         raise ValueError("Invalid YouTube URL.")
+
+#     ytt_api = YouTubeTranscriptApi()
+#     transcripts = ytt_api.list(video_id)
+
+#     requested_code = LANGUAGE_CODES.get(language, "en")
+#     transcript = _pick_transcript(transcripts, requested_code)
+
+#     # Fall back to English, then any available transcript for translation in prompts
+#     if transcript is None and requested_code != "en":
+#         transcript = _pick_transcript(transcripts, "en")
+#     if transcript is None:
+#         for t in transcripts:
+#             transcript = t.fetch()
+#             break
+
+#     return transcript if transcript else None
+
+
 def get_transcript(url, language="English"):
-    video_id = get_video_id(url)
-    if not video_id:
-        raise ValueError("Invalid YouTube URL.")
+    try:
+        print("Step 1: Extracting video ID...")
+        video_id = get_video_id(url)
+        print("Video ID:", video_id)
 
-    ytt_api = YouTubeTranscriptApi()
-    transcripts = ytt_api.list(video_id)
+        print("Step 2: Creating YouTubeTranscriptApi...")
+        ytt_api = YouTubeTranscriptApi()
 
-    requested_code = LANGUAGE_CODES.get(language, "en")
-    transcript = _pick_transcript(transcripts, requested_code)
+        print("Step 3: Listing transcripts...")
+        transcripts = ytt_api.list(video_id)
+        print("Transcript list fetched successfully.")
 
-    # Fall back to English, then any available transcript for translation in prompts
-    if transcript is None and requested_code != "en":
-        transcript = _pick_transcript(transcripts, "en")
-    if transcript is None:
-        for t in transcripts:
-            transcript = t.fetch()
-            break
+        requested_code = LANGUAGE_CODES.get(language, "en")
+        transcript = _pick_transcript(transcripts, requested_code)
 
-    return transcript if transcript else None
+        if transcript is None and requested_code != "en":
+            transcript = _pick_transcript(transcripts, "en")
 
+        if transcript is None:
+            for t in transcripts:
+                transcript = t.fetch()
+                break
 
+        print("Transcript fetched successfully.")
+        return transcript
 
+    except Exception:
+        import traceback
+        traceback.print_exc()
+        raise
 
 """
 {
