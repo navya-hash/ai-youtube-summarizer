@@ -125,6 +125,18 @@ Paste a YouTube URL and use any of the available features.
 
 ---
 
+# Screenshots
+
+![YouTube URL input and summary options](SS1.png)
+
+*Input a video URL, choose the output language, and generate summaries or answers.*
+
+![Summary and sentiment analysis output](SS2.png)
+
+*Review the generated summary, transcript sentiment, and question-answer results.*
+
+---
+
 # Deployment
 
 ## Deploy on Hugging Face Spaces
